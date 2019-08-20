@@ -1,4 +1,5 @@
 import PopulateResult from '~/services/PopulateResult'
+import referentialApi from '~/services/api/refentialApi'
 
 let i = 0
 
@@ -72,6 +73,13 @@ const actions = {
         commit('setHasMoreResult', i < 10)
         resolve()
       }, 2000)
+    })
+  },
+  suggestReferential({ commit }, { keyword, size, types }) {
+    return new Promise(async resolve => {
+      const newResult = await referentialApi.findByKeyword(keyword, size, types)
+      commit('setSuggestReferential', newResult)
+      resolve()
     })
   },
   setProfil({ commit }, profil) {

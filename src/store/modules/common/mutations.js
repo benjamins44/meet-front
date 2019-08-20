@@ -16,6 +16,9 @@ const mutations = {
   },
   setTitlePage(state, titlePage) {
     state.titlePage = titlePage
+  },
+  setSuggestReferential(state, suggestReferential) {
+    state.suggestReferential = suggestReferential
   }
 }
 

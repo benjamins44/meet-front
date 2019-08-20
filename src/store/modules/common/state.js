@@ -58,7 +58,8 @@ const state = {
     }
   },
   result: [],
-  hasMoreResult: false
+  hasMoreResult: false,
+  suggestReferential: []
 }
 
 export default state

@@ -63,13 +63,10 @@
               />
             </div>
             <div class="q-pb-md col-xs-12 col-sm-12 col-md-4 col-lg-3">
-              <q-select
-                rounded
-                :options="optionsLocalisation"
-                outlined
+              <localisation-component 
+                types="town,department,region"
+                size="5"
                 v-model="formCriteria.localisation"
-                label="Localisation"
-                bg-color="input"
               />
             </div>
             <div class="q-pb-md center col-xs-12 col-sm-6 q-pl-md-md col-md-4 col-lg-3">
@@ -124,6 +121,7 @@
 
 <script>
 import SexeComponent from '~/components/SexeComponent.vue'
+import LocalisationComponent from '~/components/LocalisationComponent.vue'
 import { mapState, mapGetters } from 'vuex'
 import store from '~/store'
 import { isEmpty } from 'lodash'
@@ -132,10 +130,11 @@ export default {
   name: 'SearchForm',
 
   components: {
+    LocalisationComponent,
     SexeComponent
   },
   computed: {
-    ...mapState('CommonStore', ['profil', 'criteria']),
+    ...mapState('CommonStore', ['formCriteria', 'formProfil']),
     ...mapGetters('CommonStore', ['resumeSearch'])
   },
   data() {
@@ -143,8 +142,7 @@ export default {
       formCriteria: { ...this.criteria },
       formProfil: { ...this.profil },
       dialog: false,
-      submitting: false,
-      optionsLocalisation: ['Ligné', 'Nantes', 'Paris']
+      submitting: false
     }
   },
   mounted() {
