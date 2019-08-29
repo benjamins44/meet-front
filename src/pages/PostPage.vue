@@ -4,8 +4,7 @@
   </q-page>
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
 import PostForm from '../components/PostForm.vue'

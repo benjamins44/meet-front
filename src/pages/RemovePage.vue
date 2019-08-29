@@ -8,8 +8,7 @@
   </q-layout>
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
 import RemoveForm from '../components/RemoveForm.vue'

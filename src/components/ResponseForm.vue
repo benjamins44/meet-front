@@ -3,48 +3,23 @@
     <q-form @submit.prevent="submit" ref="postForm">
       <div class="justify-center items-center content-center q-px-md col-12">
         <div class="col-xs-12">
-          <h5>Envoyer un message à {{ item.surname}}</h5>
+          <h5>Envoyer un message à {{ item.surname }}</h5>
         </div>
         <div class="column col-xs-12 q-pt-md justify-start">
           <div class="text-subtitle1 q-pb-sm text-primary">Attention : Méfiez-vous ...</div>
         </div>
         <div class="q-pb-md col-xs-12">
-          <q-input
-            rounded
-            outlined
-            v-model="formProfil.surname"
-            label="Votre nom *"
-            bg-color="input"
-            lazy-rules
-            :rules="[val => this.require(val)]"
-          />
+          <q-input rounded outlined v-model="formProfil.surname" label="Votre nom *" bg-color="input" lazy-rules :rules="[val => this.require(val)]" />
         </div>
         <div class="q-pb-md col-xs-12">
-          <q-input
-            rounded
-            outlined
-            v-model="formProfil.email"
-            label="Votre email *"
-            bg-color="input"
-            type="email"
-            lazy-rules
-            :rules="[val => this.require(val)]"
-          />
+          <q-input rounded outlined v-model="formProfil.email" label="Votre email *" bg-color="input" type="email" lazy-rules :rules="[val => this.require(val)]" />
         </div>
         <div class="row justify-center items-center content-center q-pb-md col-xs-12">
           <div class="col-xs-6">
             <sexe-component v-model="formProfil.sexe" />
           </div>
           <div class="col-xs-6">
-            <q-input
-              rounded
-              outlined
-              v-model="formProfil.age"
-              label="Age *"
-              bg-color="input"
-              lazy-rules
-              :rules="[val => this.validAge(val)]"
-            />
+            <q-input rounded outlined v-model="formProfil.age" label="Age *" bg-color="input" lazy-rules :rules="[val => this.validAge(val)]" />
           </div>
         </div>
         <div class="col-xs-12">
@@ -60,14 +35,7 @@
           />
         </div>
         <div class="row justify-center items-center content-center col-xs-12 q-mt-md">
-          <q-btn
-            :loading="submitting"
-            color="input"
-            type="submit"
-            rounded
-            class="bg-button"
-            label="Envoyer"
-          />
+          <q-btn :loading="submitting" color="input" type="submit" rounded class="bg-button" label="Envoyer" />
           <q-btn flat color="primary" @click="previous()" label="Annuler" class="q-ml-sm" />
         </div>
       </div>

@@ -42,14 +42,12 @@
             </div>
           </div>
           <div class="q-pb-md col-xs-12 col-sm-12 col-md-4 col-lg-3">
-            <q-select
-              rounded
-              :options="optionsLocalisation"
-              outlined
+            <localisation-component
+              types="town"
+              :size="5"
               v-model="formProfil.localisation"
-              label="Localisation *"
-              bg-color="input"
               lazy-rules
+              label="Localisation *"
               :rules="[val => this.require(val)]"
             />
           </div>
@@ -152,6 +150,7 @@
 
 <script>
 import SexeComponent from './SexeComponent.vue'
+import LocalisationComponent from '~/components/LocalisationComponent.vue'
 import { mapState } from 'vuex'
 import ValidationMixin from '~/mixins/ValidationMixin'
 import store from '~/store'
@@ -160,6 +159,7 @@ export default {
   name: 'PostForm',
   mixins: [ValidationMixin],
   components: {
+    LocalisationComponent,
     SexeComponent
   },
   data() {

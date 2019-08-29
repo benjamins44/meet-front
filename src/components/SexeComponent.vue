@@ -9,10 +9,7 @@
     toggle-color="toggle"
     color="white"
     text-color="primary"
-    :options="[
-          {slot: 'one', value: 'M'},
-          {slot: 'two', value: 'F'},
-        ]"
+    :options="[{ slot: 'one', value: 'M' }, { slot: 'two', value: 'F' }]"
   >
     <template v-slot:one>
       <div class="row items-center no-wrap">
@@ -33,7 +30,6 @@
   border: 1px solid $grey-5;
 }
 </style>
-
 
 <script>
 export default {

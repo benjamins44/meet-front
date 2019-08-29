@@ -13,8 +13,7 @@
         </div>
         <div class="text-body2">
           <q-icon name="fas fa-search" size="1rem" color="primary"></q-icon>
-          Recherche un{{ item.sexeSearch === 'F' ? 'e' : '' }} {{ labelSexe[item.sexeSearch]}}
-          entre {{ item.rangeAge.min }} et {{ item.rangeAge.max }} ans
+          Recherche un{{ item.sexeSearch === 'F' ? 'e' : '' }} {{ labelSexe[item.sexeSearch] }} entre {{ item.rangeAge.min }} et {{ item.rangeAge.max }} ans
         </div>
 
         <div class="q-py-md text-caption">
@@ -37,18 +36,10 @@
 
     <q-page-sticky expand position="bottom">
       <q-toolbar class="row q-x-col-12 bg-accent text-white q-pa-md justify-between items-stretch">
-        <div class="column items-center" @click="response()">
-          <q-icon name="fas fa-pen" size="1.5rem" color="white"></q-icon>Ecrire
-        </div>
-        <div class="column items-center">
-          <q-icon name="fas fa-exclamation-circle" @click="alert()" size="1.5rem" color="white"></q-icon>Signaler
-        </div>
-        <div class="column items-center" @click="remove()">
-          <q-icon name="fas fa-trash" size="1.5rem" color="white"></q-icon>Supprimer
-        </div>
-        <div class="column items-center" @click="previous()">
-          <q-icon name="fas fa-undo" size="1.5rem" color="white"></q-icon>Fermer
-        </div>
+        <div class="column items-center" @click="response()"><q-icon name="fas fa-pen" size="1.5rem" color="white"></q-icon>Ecrire</div>
+        <div class="column items-center"><q-icon name="fas fa-exclamation-circle" @click="alert()" size="1.5rem" color="white"></q-icon>Signaler</div>
+        <div class="column items-center" @click="remove()"><q-icon name="fas fa-trash" size="1.5rem" color="white"></q-icon>Supprimer</div>
+        <div class="column items-center" @click="previous()"><q-icon name="fas fa-undo" size="1.5rem" color="white"></q-icon>Fermer</div>
       </q-toolbar>
     </q-page-sticky>
   </div>

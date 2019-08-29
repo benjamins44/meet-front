@@ -8,8 +8,7 @@
   </q-layout>
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
 import AlertForm from '../components/AlertForm.vue'

@@ -10,7 +10,10 @@ const state = {
     sexe: 'M',
     sexeSearch: 'F',
     age: null,
-    localisation: '',
+    localisation: {
+      code: '',
+      label: ''
+    },
     rangeAge: {
       min: 18,
       max: 99
@@ -26,7 +29,10 @@ const state = {
     sexe: 'M',
     sexeSearch: 'F',
     age: null,
-    localisation: '',
+    localisation: {
+      code: '',
+      label: ''
+    },
     rangeAge: {
       min: 18,
       max: 99
@@ -42,7 +48,11 @@ const state = {
     sexe: 'M',
     sexeSearch: 'F',
     age: null,
-    localisation: '',
+    localisation: {
+      code: '',
+      label: ''
+    },
+
     rangeAge: {
       min: 18,
       max: 99
@@ -50,7 +60,11 @@ const state = {
   },
   criteria: {
     keywords: '',
-    localisation: '',
+    localisation: {
+      code: '',
+      label: ''
+    },
+
     sexe: 'F',
     rangeAge: {
       min: 18,

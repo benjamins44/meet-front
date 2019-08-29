@@ -8,8 +8,7 @@
   </q-layout>
 </template>
 
-<style>
-</style>
+<style></style>
 
 <script>
 import ResponseForm from '../components/ResponseForm.vue'

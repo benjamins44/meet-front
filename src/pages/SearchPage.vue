@@ -8,8 +8,7 @@
   </q-page>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>
 
 <script>
 import SearchForm from '../components/SearchForm.vue'

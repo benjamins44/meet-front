@@ -3,19 +3,10 @@
     <q-form @submit.prevent="submit" ref="postForm">
       <div class="justify-center items-center content-center q-px-md col-12">
         <div class="col-xs-12">
-          <h5>Alert sur l'annonce de {{ item.surname}}</h5>
+          <h5>Alert sur l'annonce de {{ item.surname }}</h5>
         </div>
         <div class="q-pb-md col-xs-12">
-          <q-input
-            rounded
-            outlined
-            v-model="formProfil.email"
-            label="Votre email *"
-            bg-color="input"
-            type="email"
-            lazy-rules
-            :rules="[val => this.require(val)]"
-          />
+          <q-input rounded outlined v-model="formProfil.email" label="Votre email *" bg-color="input" type="email" lazy-rules :rules="[val => this.require(val)]" />
         </div>
         <div class="col-xs-12">
           <q-input
@@ -30,14 +21,7 @@
           />
         </div>
         <div class="row justify-center items-center content-center col-xs-12 q-mt-md">
-          <q-btn
-            :loading="submitting"
-            color="input"
-            type="submit"
-            rounded
-            class="bg-button"
-            label="Envoyer"
-          />
+          <q-btn :loading="submitting" color="input" type="submit" rounded class="bg-button" label="Envoyer" />
           <q-btn flat color="primary" @click="previous()" label="Annuler" class="q-ml-sm" />
         </div>
       </div>

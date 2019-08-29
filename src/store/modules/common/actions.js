@@ -1,5 +1,5 @@
 import PopulateResult from '~/services/PopulateResult'
-import referentialApi from '~/services/api/refentialApi'
+import referentialApi from '~/services/api/referentialApi'
 
 let i = 0
 
@@ -36,7 +36,12 @@ const actions = {
       }, 2000)
     })
   },
-  async search({ commit }) {
+  async search({ commit }, { profil, criteria }) {
+    commit('setProfil', profil)
+    commit('setCriteria', criteria)
+    console.log(`profil: ${JSON.stringify(profil)}`)
+    console.log(`criteria: ${JSON.stringify(criteria)}`)
+
     return new Promise(resolve => {
       setTimeout(() => {
         i = 1
@@ -75,12 +80,10 @@ const actions = {
       }, 2000)
     })
   },
-  suggestReferential({ commit }, { keyword, size, types }) {
-    return new Promise(async resolve => {
-      const newResult = await referentialApi.findByKeyword(keyword, size, types)
-      commit('setSuggestReferential', newResult)
-      resolve()
-    })
+  async suggestReferential({ commit }, { keyword, size, types }) {
+    const newResult = await referentialApi.findByKeyword(keyword, size, types)
+    console.log(newResult)
+    commit('setSuggestReferential', newResult)
   },
   setProfil({ commit }, profil) {
     commit('setProfil', profil)
