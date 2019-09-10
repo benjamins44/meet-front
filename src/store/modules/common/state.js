@@ -73,6 +73,8 @@ const state = {
   },
   result: [],
   hasMoreResult: false,
+  total: 0,
+  nextPage: 0,
   suggestReferential: []
 }
 

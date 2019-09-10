@@ -13,7 +13,7 @@
             <div class="column justify-start">
               <div class="text-h6">{{ item.surname }}</div>
               <div class="text-body2">{{ item.age }} ans</div>
-              <div class="text-body2">{{ item.localisation }}</div>
+              <div class="text-body2">{{ item.town.label }}</div>
             </div>
             <div>&nbsp;</div>
             <div class="column justify-start items-end">
@@ -21,7 +21,7 @@
                 <q-icon name="search" size="1rem" />
               </q-avatar>
 
-              <div class="text-body2">{{ item.rangeAge.min }} - {{ item.rangeAge.max }} ans</div>
+              <div class="text-body2">{{ item.rangeAgeMin }} - {{ item.rangeAgeMax }} ans</div>
             </div>
           </div>
         </q-card-section>
@@ -29,7 +29,7 @@
 
         <q-card-section class="bg-input column">
           <div class="column justify-start items-end">
-            <div class="text-caption">{{ formatDate(item.publishDate) }}</div>
+            <div class="text-caption">{{ formatDate(item.publishedDate) }}</div>
           </div>
         </q-card-section>
       </q-card>
@@ -61,7 +61,7 @@ export default {
 
   components: {},
   computed: {
-    ...mapState('CommonStore', ['result', 'hasMoreResult'])
+    ...mapState('CommonStore', ['result', 'hasMoreResult', 'nextPage', 'profil', 'criteria'])
   },
   data() {
     return {
@@ -87,7 +87,8 @@ export default {
     },
     async nextResult() {
       this.submitting = true
-      await store.dispatch('CommonStore/nextResult')
+      console.log(this.nextPage)
+      await store.dispatch('CommonStore/search', {profil: this.profil, criteria: this.criteria, page: this.nextPage})
       this.submitting = false
     },
     goToDetail(id) {

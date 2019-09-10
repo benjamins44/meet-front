@@ -1,7 +1,6 @@
 import PopulateResult from '~/services/PopulateResult'
 import referentialApi from '~/services/api/referentialApi'
-
-let i = 0
+import meetApi from '~/services/api/meetApi'
 
 const actions = {
   async post({ commit }, profil) {
@@ -36,19 +35,27 @@ const actions = {
       }, 2000)
     })
   },
-  async search({ commit }, { profil, criteria }) {
+  async search({ commit, state }, { profil, criteria, page }) {
     commit('setProfil', profil)
     commit('setCriteria', criteria)
     console.log(`profil: ${JSON.stringify(profil)}`)
     console.log(`criteria: ${JSON.stringify(criteria)}`)
-
-    return new Promise(resolve => {
-      setTimeout(() => {
-        i = 1
-        commit('setResult', PopulateResult.generateProfils(10))
-        commit('setHasMoreResult', true)
-        resolve()
-      }, 2000)
+    
+    return new Promise(async resolve => {
+      const result = await meetApi.findByCriteria(profil, criteria, page, 10)
+      let newResult = []
+      if (page > 1) {
+        newResult = [...state.result, ...result.items]
+      } else {
+        newResult = result.items
+      }
+      commit('setResult', newResult)
+      commit('setHasMoreResult', result.hasNext)
+      commit('setTotal', result.total)
+      if (result.hasNext) {
+        commit('setNextPage', page + 1)
+      }
+      resolve()
     })
   },
   async searchItem({ commit, state }, id) {
@@ -65,17 +72,6 @@ const actions = {
         } else {
           commit('setItem', ...PopulateResult.generateProfils(1))
         }
-        resolve()
-      }, 2000)
-    })
-  },
-  nextResult({ commit, state }) {
-    return new Promise(resolve => {
-      setTimeout(() => {
-        i++
-        let newResult = [...state.result, ...PopulateResult.generateProfils(10)]
-        commit('setResult', newResult)
-        commit('setHasMoreResult', i < 10)
         resolve()
       }, 2000)
     })

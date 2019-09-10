@@ -117,7 +117,7 @@ export default {
     async search() {
       if (this.$refs.searchForm.validate()) {
         this.submitting = true
-        await store.dispatch('CommonStore/search', {profil : this.formProfil, criteria: this.formCriteria})
+        await store.dispatch('CommonStore/search', {profil : this.formProfil, criteria: this.formCriteria, page: 1})
         this.submitting = false
         this.close()
       }

@@ -1,8 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-toolbar class="bg-primary text-white shadow-2">
-      <q-toolbar-title>On se rencontre</q-toolbar-title>
-    </q-toolbar>
+    <q-img src="/assets/logo.jpg">
+      <div class="absolute-full text-h4 text-italic flex flex-center">On se rencontre</div>
+    </q-img>
     <q-list>
       <q-item
         v-for="(item, i) in items"
@@ -12,25 +12,19 @@
         v-ripple
         :active="link === item.key"
         @click="link = item.key"
-        active-class="my-menu-link"
       >
         <q-item-section avatar>
           <q-icon :name="item.icon" />
         </q-item-section>
         <q-item-section>
-          <q-item-label>{{ item.title }}</q-item-label>
+          <q-item-label class="text-bold">{{ item.title }}</q-item-label>
         </q-item-section>
       </q-item>
     </q-list>
   </q-layout>
 </template>
 
-<style lang="stylus">
-.my-menu-link {
-  color: white;
-  background: $secondary;
-}
-</style>
+<style lang="stylus"></style>
 
 <script>
 export default {

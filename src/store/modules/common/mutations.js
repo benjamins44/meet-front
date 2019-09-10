@@ -11,6 +11,12 @@ const mutations = {
   setItem(state, item) {
     state.item = item
   },
+  setTotal(state, total) {
+    state.total = total
+  },
+  setNextPage(state, nextPage) {
+    state.nextPage = nextPage
+  },
   setHasMoreResult(state, hasMoreResult) {
     state.hasMoreResult = hasMoreResult
   },

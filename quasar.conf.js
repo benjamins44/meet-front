@@ -49,6 +49,7 @@ module.exports = function(ctx) {
         'QForm',
         'QIcon',
         'QList',
+        'QImg',
         'QInfiniteScroll',
         'QItem',
         'QItemSection',
@@ -80,6 +81,9 @@ module.exports = function(ctx) {
     supportIE: false,
 
     build: {
+      env: {
+        MEET_API_URL: JSON.stringify(process.env.MEET_API_URL)
+      },
       scopeHoisting: true,
       vueRouterMode: 'history',
       // vueCompiler: true,
