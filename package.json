@@ -7,9 +7,9 @@
   "author": "Benjamin Corré <benjamin.corre@systeme-u.fr>",
   "private": true,
   "scripts": {
-    "dev": "env-cmd .env.developpement quasar dev",
+    "dev": "env-cmd .env.developpement quasar dev -m ssr",
     "build": "quasar build",
-    "build:pwa": "quasar build -m pwa",
+    "build:pwa": "quasar build -m pwa ssr",
     "lint": "eslint --ext .js,.vue src",
     "test": "echo \"No test specified\" && exit 0"
   },
