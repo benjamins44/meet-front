@@ -54,6 +54,7 @@ module.exports = function(ctx) {
         'QItem',
         'QItemSection',
         'QItemLabel',
+        'QPagination',
         'QPullToRefresh',
         'QRange',
         'QSelect',

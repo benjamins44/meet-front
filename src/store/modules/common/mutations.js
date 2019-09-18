@@ -1,9 +1,9 @@
 const mutations = {
-  setProfil(state, profil) {
-    state.profil = profil
+  setQueries(state, queries) {
+    state.queries = queries
   },
-  setCriteria(state, criteria) {
-    state.criteria = criteria
+  setCriterias(state, criterias) {
+    state.criterias = criterias
   },
   setResult(state, result) {
     state.result = result
@@ -16,6 +16,12 @@ const mutations = {
   },
   setNextPage(state, nextPage) {
     state.nextPage = nextPage
+  },
+  setPage(state, page) {
+    state.page = page
+  },
+  setTotalPage(state, totalPage) {
+    state.totalPage = totalPage
   },
   setHasMoreResult(state, hasMoreResult) {
     state.hasMoreResult = hasMoreResult

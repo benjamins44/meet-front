@@ -33,9 +33,6 @@
           </div>
         </q-card-section>
       </q-card>
-      <div class="next-div-button column justify-start items-end">
-        <q-btn :loading="submitting" :hidden="!hasMoreResult" flat rounded color="primary" @click="nextResult()" icon="fas fa-angle-right" class="q-my-md" />
-      </div>
     </div>
   </div>
 </template>
@@ -53,7 +50,6 @@
 <script>
 import { mapState } from 'vuex'
 import moment from 'moment'
-import store from '~/store'
 // import { isEmpty } from 'lodash'
 
 export default {
@@ -61,7 +57,7 @@ export default {
 
   components: {},
   computed: {
-    ...mapState('CommonStore', ['result', 'hasMoreResult', 'nextPage', 'profil', 'criteria'])
+    ...mapState('CommonStore', ['result'])
   },
   data() {
     return {
@@ -84,12 +80,6 @@ export default {
     },
     logoColor(sexe) {
       return sexe === 'M' ? 'header-male' : 'header-female'
-    },
-    async nextResult() {
-      this.submitting = true
-      console.log(this.nextPage)
-      await store.dispatch('CommonStore/search', {profil: this.profil, criteria: this.criteria, page: this.nextPage})
-      this.submitting = false
     },
     goToDetail(id) {
       const route = `/detail/${id}`

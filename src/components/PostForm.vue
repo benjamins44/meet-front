@@ -4,52 +4,21 @@
       <q-stepper flat v-model="step" vertical ref="stepper" color="primary" animated>
         <q-step :name="1" title="Je suis" icon="fas fa-presentation" :done="step > 1">
           <div class="q-pb-md col-xs-12">
-            <q-input
-              rounded
-              outlined
-              v-model="formProfil.title"
-              label="Titre *"
-              bg-color="input"
-              lazy-rules
-              :rules="[val => this.require(val)]"
-            />
+            <q-input rounded outlined v-model="formProfil.title" label="Titre *" bg-color="input" lazy-rules :rules="[val => this.require(val)]" />
           </div>
           <div class="q-pb-md col-xs-12">
-            <q-input
-              rounded
-              outlined
-              v-model="formProfil.surname"
-              label="Surnom *"
-              bg-color="input"
-              lazy-rules
-              :rules="[val => this.require(val)]"
-            />
+            <q-input rounded outlined v-model="formProfil.surname" label="Surnom *" bg-color="input" lazy-rules :rules="[val => this.require(val)]" />
           </div>
           <div class="row justify-center items-center content-center q-pb-md col-xs-12">
             <div class="col-xs-6">
               <sexe-component v-model="formProfil.sexe" />
             </div>
             <div class="col-xs-6">
-              <q-input
-                rounded
-                outlined
-                v-model="formProfil.age"
-                label="Age *"
-                bg-color="input"
-                lazy-rules
-                :rules="[val => this.validAge(val)]"
-              />
+              <q-input rounded outlined v-model="formProfil.age" label="Age *" bg-color="input" lazy-rules :rules="[val => this.validAge(val)]" />
             </div>
           </div>
           <div class="q-pb-md col-xs-12 col-sm-12 col-md-4 col-lg-3">
-            <localisation-component
-              types="town"
-              :size="5"
-              v-model="formProfil.localisation"
-              lazy-rules
-              label="Localisation *"
-              :rules="[val => this.require(val)]"
-            />
+            <localisation-component types="town" :size="5" v-model="formProfil.localisation" lazy-rules label="Localisation *" :rules="[val => this.require(val)]" />
           </div>
         </q-step>
 
@@ -68,40 +37,21 @@
           </div>
         </q-step>
         <q-step :name="3" title="Je recherche" icon="search" :done="step > 3">
-          <div
-            class="row justify-center items-center content-center q-pb-md col-xs-12 col-sm-6 col-md-4 q-pl-md-md col-lg-3"
-          >
+          <div class="row justify-center items-center content-center q-pb-md col-xs-12 col-sm-6 col-md-4 q-pl-md-md col-lg-3">
             <div class="q-pb-md col-xs-6">
               <sexe-component v-model="formProfil.sexeSearch" />
             </div>
             <div class="row justify-center items-center content-center col-xs-12">
               <div class="col-2">Age</div>
               <div class="col-10">
-                <q-range
-                  snap
-                  label
-                  color="blue"
-                  label-color="blue"
-                  v-model="formProfil.rangeAge"
-                  :min="18"
-                  :max="99"
-                />
+                <q-range snap label color="blue" label-color="blue" v-model="formProfil.rangeAge" :min="18" :max="99" />
               </div>
             </div>
           </div>
         </q-step>
         <q-step :name="4" title="Je valide" icon="fas fa-check" :done="step > 4">
           <div class="col-xs-12">
-            <q-input
-              type="email"
-              rounded
-              outlined
-              v-model="formProfil.email"
-              label="Email *"
-              bg-color="input"
-              :lazy-rules="lazyRules4"
-              :rules="rulesRequired4"
-            />
+            <q-input type="email" rounded outlined v-model="formProfil.email" label="Email *" bg-color="input" :lazy-rules="lazyRules4" :rules="rulesRequired4" />
           </div>
           <div class="col-xs-12">
             <q-input
@@ -118,23 +68,8 @@
         </q-step>
         <template v-slot:navigation>
           <q-stepper-navigation>
-            <q-btn
-              v-if="step <= 4"
-              :loading="submitting"
-              color="input"
-              type="submit"
-              rounded
-              class="bg-button"
-              :label="step < 4 ? 'Continuer' : 'Terminer'"
-            />
-            <q-btn
-              v-if="step > 1"
-              flat
-              color="primary"
-              @click="$refs.stepper.previous()"
-              label="Retour"
-              class="q-ml-sm"
-            />
+            <q-btn v-if="step <= 4" :loading="submitting" color="input" type="submit" rounded class="bg-button" :label="step < 4 ? 'Continuer' : 'Terminer'" />
+            <q-btn v-if="step > 1" flat color="primary" @click="$refs.stepper.previous()" label="Retour" class="q-ml-sm" />
           </q-stepper-navigation>
         </template>
       </q-stepper>

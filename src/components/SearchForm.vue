@@ -8,8 +8,8 @@
           </template>
         </q-input>
       </div>
-    </div>
-    <q-dialog v-model="dialog" persistent maximized transition-show="slide-up" transition-hide="slide-down">
+    </div>  
+    <q-dialog v-model="dialog" persistent maximized transition-show="slide-down" transition-hide="slide-up">
       <q-card class="bg-primary text-white">
         <q-bar>
           <q-space />
@@ -23,26 +23,26 @@
               <h5>Je suis</h5>
             </div>
             <div class="row justify-center items-center content-center q-pb-md col-xs-12 col-sm-6 col-md-4 q-pl-md-md col-lg-3">
-              <sexe-component v-model="formProfil.sexe" />
+              <sexe-component v-model="formCriterias.sexe" />
               <div class="col-xs-2 center">de</div>
-              <q-input type="number" rounded outlined v-model="formProfil.age" label="Age" bg-color="input" class="col-4" lazy-rules :rules="[val => validAge(val)]" />
+              <q-input type="number" rounded outlined v-model="formCriterias.age" hide-bottom-space label="Age" bg-color="input" class="col-4" lazy-rules :rules="[val => validAge(val)]" />
             </div>
             <div class="col-xs-12">
               <h5>Je recherche</h5>
             </div>
             <div class="q-pb-md col-xs-12">
-              <q-input rounded outlined v-model="formCriteria.keywords" label="Mots clés" bg-color="input" />
+              <q-input rounded outlined v-model="formCriterias.keywords" label="Mots clés" bg-color="input" />
             </div>
             <div class="q-pb-md col-xs-12 col-sm-12 col-md-4 col-lg-3">
-              <localisation-component types="town,department,region" :size="5" v-model="formCriteria.localisation" />
+              <localisation-component types="town,department,region" :size="5" v-model="formCriterias.localisation" />
             </div>
             <div class="q-pb-md center col-xs-12 col-sm-6 q-pl-md-md col-md-4 col-lg-3">
-              <sexe-component v-model="formCriteria.sexe" />
+              <sexe-component v-model="formCriterias.sexeSearch" />
             </div>
             <div class="row justify-center items-center content-center q-pb-xl col-xs-12 col-sm-6 col-md-4 q-pl-md-md col-lg-3">
               <div class="col-2">Age</div>
               <div class="col-10">
-                <q-range dark snap label color="blue" label-color="blue" v-model="formCriteria.rangeAge" :min="18" :max="99" />
+                <q-range dark snap label color="blue" label-color="blue" v-model="formCriterias.rangeAge" :min="18" :max="99" />
               </div>
             </div>
             <div class="q-pb-md center col-xs-12 col-sm-12 col-lg-3">
@@ -73,8 +73,8 @@
 import SexeComponent from '~/components/SexeComponent.vue'
 import LocalisationComponent from '~/components/LocalisationComponent.vue'
 import { mapState, mapGetters } from 'vuex'
-import store from '~/store'
 import { isEmpty } from 'lodash'
+import searchQueryUtils from '~/services/searchQueryUtils'
 
 export default {
   name: 'SearchForm',
@@ -84,27 +84,22 @@ export default {
     SexeComponent
   },
   computed: {
-    ...mapState('CommonStore', ['criteria', 'profil']),
+    ...mapState('CommonStore', ['criterias']),
     ...mapGetters('CommonStore', ['resumeSearch'])
   },
   data() {
     return {
-      formCriteria: { ...this.criteria },
-      formProfil: { ...this.profil },
+      formCriterias: { ...this.criterias },
       dialog: false,
       submitting: false
     }
   },
   mounted() {
-    this.formCriteria = { ...this.criteria }
-    this.formProfil = { ...this.profil }
+    this.formCriterias = { ...this.criterias }
   },
   watch: {
-    criteria() {
-      this.formCriteria = { ...this.criteria }
-    },
-    profil() {
-      this.formProfil = { ...this.profil }
+    criterias() {
+      this.formCriterias = { ...this.criterias }
     }
   },
   methods: {
@@ -117,7 +112,8 @@ export default {
     async search() {
       if (this.$refs.searchForm.validate()) {
         this.submitting = true
-        await store.dispatch('CommonStore/search', {profil : this.formProfil, criteria: this.formCriteria, page: 1})
+        const allQueries = await searchQueryUtils.getQueries(this.formCriterias, 1)
+        this.$router.push(`/search?${allQueries}`)
         this.submitting = false
         this.close()
       }

@@ -8,6 +8,7 @@
     v-model="localisationLocal"
     bg-color="input"
     use-input
+    clearable
     input-debounce="500"
     @filter="filterFn"
     :lazy-rules="lazyRules"
@@ -15,7 +16,7 @@
     :label="label"
   >
     <template v-slot:no-option>
-      <q-item>Pas de résultat</q-item>
+      <q-item>Veuillez entrer 3 caractères</q-item>
     </template>
   </q-select>
 </template>
@@ -24,6 +25,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { isEmpty } from 'lodash'
 import store from '~/store'
 
 export default {
@@ -49,25 +51,24 @@ export default {
   data() {
     return {
       suggestReferentialLocal: [],
-      localisationLocal: Object
+      localisationLocal: null
     }
   },
   computed: {
-    ...mapGetters('CommonStore', ['suggestReferentialFormatted'])
+    ...mapGetters('CommonStore', ['suggestReferential'])
   },
   mounted() {
-    this.localisationLocal = this.localisation
-    console.log('localisation: ' + JSON.stringify(this.localisation))
+    this.localisationLocal = isEmpty(this.localisation.code) ? null : this.localisation
   },
   watch: {
     localisationLocal(value) {
       console.log(JSON.stringify(value))
       this.$emit('localisationchange', value)
     },
-    suggestReferentialFormatted() {
-      console.log('suggestReferentialFormatted')
-      this.suggestReferentialLocal = this.suggestReferentialFormatted
-      console.log(this.suggestReferentialFormatted)
+    suggestReferential() {
+      console.log('suggestReferential')
+      this.suggestReferentialLocal = this.suggestReferential
+      console.log(this.suggestReferential)
     }
   },
   methods: {

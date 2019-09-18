@@ -1,6 +1,6 @@
-import PopulateResult from '~/services/PopulateResult'
 import referentialApi from '~/services/api/referentialApi'
 import meetApi from '~/services/api/meetApi'
+import searchQueryUtils from '../../../services/searchQueryUtils'
 
 const actions = {
   async post({ commit }, profil) {
@@ -35,27 +35,27 @@ const actions = {
       }, 2000)
     })
   },
-  async search({ commit, state }, { profil, criteria, page }) {
-    commit('setProfil', profil)
-    commit('setCriteria', criteria)
-    console.log(`profil: ${JSON.stringify(profil)}`)
-    console.log(`criteria: ${JSON.stringify(criteria)}`)
-    
-    return new Promise(async resolve => {
-      const result = await meetApi.findByCriteria(profil, criteria, page, 10)
-      let newResult = []
-      if (page > 1) {
-        newResult = [...state.result, ...result.items]
-      } else {
-        newResult = result.items
-      }
-      commit('setResult', newResult)
-      commit('setHasMoreResult', result.hasNext)
-      commit('setTotal', result.total)
-      if (result.hasNext) {
-        commit('setNextPage', page + 1)
-      }
-      resolve()
+  async search({ commit, state }, { queries }) {
+    commit('setCriterias', await searchQueryUtils.getCriterias(queries))
+
+    return new Promise(resolve => {
+      meetApi.findByCriteria(searchQueryUtils.defaultQuery(queries)).then(result => {
+        let newResult = []
+        if (queries.page > 1) {
+          newResult = [...state.result, ...result.items]
+        } else {
+          newResult = result.items
+        }
+        commit('setResult', newResult)
+        commit('setHasMoreResult', result.hasNext)
+        commit('setTotal', result.total)
+        commit('setTotalPage', parseInt(result.total / queries.size))
+        commit('setPage', queries.page)
+        if (result.hasNext) {
+          commit('setNextPage', queries.page + 1)
+        }
+        resolve()
+      })
     })
   },
   async searchItem({ commit, state }, id) {
@@ -70,7 +70,7 @@ const actions = {
         if (items && items.length > 0) {
           commit('setItem', items[0])
         } else {
-          commit('setItem', ...PopulateResult.generateProfils(1))
+          // commit('setItem', ...PopulateResult.generateProfils(1))
         }
         resolve()
       }, 2000)

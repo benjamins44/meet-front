@@ -17,7 +17,7 @@
       <router-view />
     </q-page-container>
 
-    <q-page-scroller position="bottom">
+    <q-page-scroller position="bottom-right">
       <q-btn fab icon="keyboard_arrow_up" color="red" />
     </q-page-scroller>
   </q-layout>

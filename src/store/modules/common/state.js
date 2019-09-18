@@ -1,24 +1,6 @@
 const state = {
   titlePage: '',
-  profil: {
-    id: null,
-    title: null,
-    surname: null,
-    description: null,
-    email: null,
-    password: null,
-    sexe: 'M',
-    sexeSearch: 'F',
-    age: null,
-    localisation: {
-      code: '',
-      label: ''
-    },
-    rangeAge: {
-      min: 18,
-      max: 99
-    }
-  },
+  queries: {},
   defaultProfil: {
     id: null,
     title: null,
@@ -29,10 +11,7 @@ const state = {
     sexe: 'M',
     sexeSearch: 'F',
     age: null,
-    localisation: {
-      code: '',
-      label: ''
-    },
+    localisation: null,
     rangeAge: {
       min: 18,
       max: 99
@@ -48,17 +27,14 @@ const state = {
     sexe: 'M',
     sexeSearch: 'F',
     age: null,
-    localisation: {
-      code: '',
-      label: ''
-    },
+    localisation: null,
 
     rangeAge: {
       min: 18,
       max: 99
     }
   },
-  criteria: {
+  criterias: {
     keywords: '',
     localisation: {
       code: '',
@@ -74,7 +50,9 @@ const state = {
   result: [],
   hasMoreResult: false,
   total: 0,
+  page: 0,
   nextPage: 0,
+  totalPage: 0,
   suggestReferential: []
 }
 

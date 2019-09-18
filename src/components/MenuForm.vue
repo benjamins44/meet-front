@@ -1,18 +1,10 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-img src="/assets/logo.jpg">
+    <q-img :src="require('../assets/logo.jpg')">
       <div class="absolute-full text-h4 text-italic flex flex-center">On se rencontre</div>
     </q-img>
     <q-list>
-      <q-item
-        v-for="(item, i) in items"
-        :key="i"
-        clickable
-        :to="item.navigation"
-        v-ripple
-        :active="link === item.key"
-        @click="link = item.key"
-      >
+      <q-item v-for="(item, i) in items" :key="i" clickable :to="item.navigation" v-ripple :active="link === item.key" @click="link = item.key">
         <q-item-section avatar>
           <q-icon :name="item.icon" />
         </q-item-section>
